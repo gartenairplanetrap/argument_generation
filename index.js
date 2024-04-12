@@ -2,8 +2,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai')
 const sqlite3 = require('sqlite3').verbose(); // Initialize sqlite3
 require('dotenv').config()
 
-const genAI = new GoogleGenerativeAI("AIzaSyBmfRSbDC2ev31qagwddWK1gSKscFJaihc")
-// new GoogleGenerativeAI(process.env.API_KEY)
+new GoogleGenerativeAI(process.env.API_KEY)
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -18,7 +17,6 @@ const db = new sqlite3.Database('./arguments.db', (err) => {
     console.log('Connected to the arguments database.');
 })
 
-// Create tables if they don't exist (add this part when the app starts)
 // input
 db.run(`CREATE TABLE IF NOT EXISTS prompts (
             id INTEGER PRIMARY KEY,
@@ -30,6 +28,7 @@ db.run(`CREATE TABLE IF NOT EXISTS schemes (
             description TEXT,
             example TEXT
         )`)
+
 // output
 db.run(`CREATE TABLE IF NOT EXISTS arguments (
             id INTEGER PRIMARY KEY,
